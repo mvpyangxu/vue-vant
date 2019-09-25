@@ -1,0 +1,18 @@
+/* 全局样式表 */
+html,
+body,
+#app {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin:0;
+    min-width: 320px;
+}
+.van-col{
+    height: 40px;
+    line-height: 40px;
+    background-color: #1989FA;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+  }

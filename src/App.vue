@@ -1,29 +1,31 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+      <!-- 头部 -->
+      <van-row>
+        <van-col span="24">黑马程序员.vant</van-col>
+      </van-row>
+      <router-view />
+      <!-- 底部 -->
+      <van-row>
+        <van-tabbar v-model="active">
+          <van-tabbar-item icon="wap-home" :to="{ path: '/index' }">首页</van-tabbar-item>
+          <van-tabbar-item icon="user-o" :to="{ path: '/vip' }">会员</van-tabbar-item>
+          <van-tabbar-item icon="cart" :to="{ path: '/shopCar' }">购物车</van-tabbar-item>
+          <van-tabbar-item icon="search" :to="{ path: '/search' }">搜索</van-tabbar-item>
+        </van-tabbar>
+      </van-row>
   </div>
 </template>
-
-<style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import { pictureApi } from '@/api'
+export default {
+  data(){
+    return {
+      active: 0
     }
   }
 }
+</script>
+<style lang="less">
 </style>
+
