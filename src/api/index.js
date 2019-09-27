@@ -1,20 +1,29 @@
+// 导入axios
 import axios from 'axios'
-// 导入进度条 及 样式表
-import Nporgress from 'nprogress'
-import 'nprogress/nprogress.css'
+// 抽离公共地址
 axios.defaults.baseURL = 'http://www.liulongbin.top:3005/'
-axios.interceptors.request.use(res => {
-  // 展示进度条
-  Nporgress.start()
-  res.headers.Authorization = window.sessionStorage.getItem('token');
-  return res
-})
-axios.interceptors.response.use(res => {
-  // 隐藏进度条
-  Nporgress.done()
-  return res 
-})
-// 获取图片地址api
-export const pictureApi = params => {
-    return axios.get('/api/getlunbo') 
+
+// 获取商品列表
+export const getGoodsList_api = pageindex => {
+    return axios.get(`/api/getgoods?pageindex=${pageindex}`)
+}
+
+// 获取商品轮播图
+export const getGoodsImg_api = imgid => {
+    return axios.get(`/api/getthumimages/${imgid}`)
+}
+
+// 获取商品参数区和价格_标题等数据
+export const getGoodsInfo_api = id => {
+    return axios.get(`/api/goods/getinfo/${id}`)
+}
+
+// 获取商品图文介绍
+export const getdesc_api = id => {
+    return axios.get(`/api/goods/getdesc/${id}`)
+}
+
+// 获取首页轮播图
+export const getIndexImg_api = () => {
+    return axios.get(`/api/getlunbo`)
 }

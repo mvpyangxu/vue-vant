@@ -2,16 +2,18 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+// 引入vant
 import Vant from 'vant'
 import 'vant/lib/index.css'
-import './assets/css/global.css'
-
-
-Vue.use(Vant);
+// 注册vant
+Vue.use(Vant)
 Vue.config.productionTip = false
 
+//导入字体图标
+import './assets/font/iconfont'
+
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')

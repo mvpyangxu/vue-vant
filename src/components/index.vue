@@ -1,48 +1,73 @@
 <template>
   <div>
-      <!-- 轮播图部分 -->
-      <van-row>
-        <van-swipe :autoplay="3000" indicator-color="white">
-          <van-swipe-item v-for="(item,i) in imageArr" :key="i"><van-image class="lunboImage" :src="imageArr[i]"/></van-swipe-item>
-        </van-swipe>
-      </van-row>
-      <!-- 九宫格 -->
-      <van-row>
-        <van-grid :column-num="3">
-          <van-grid-item :icon="require('../assets/image/menu1.png')" text="新闻资讯"/>
-          <van-grid-item :icon="require('../assets/image/menu2.png')" text="图片分享"/>
-          <van-grid-item :icon="require('../assets/image/menu3.png')" text="商品购买"/>
-          <van-grid-item :icon="require('../assets/image/menu4.png')" text="留言反馈"/>
-          <van-grid-item :icon="require('../assets/image/menu5.png')" text="视频专区"/>
-          <van-grid-item :icon="require('../assets/image/menu6.png')" text="联系我们"/>
-        </van-grid>
-      </van-row>
+    <van-swipe :height="200" :autoplay="3000" indicator-color="white">
+      <van-swipe-item v-for="(item, id) in images" :key="id">
+        <img :src="item.img" />
+      </van-swipe-item>
+    </van-swipe>
+
+    <!-- 九宫格内容 -->
+    <van-grid :border="false" :column-num="3">
+      <van-grid-item to="/newslist">
+        <img src="../assets/img/menu1.png" />
+        <p>新闻资讯</p>
+      </van-grid-item>
+      <van-grid-item to="/photo/list">
+        <img src="../assets/img/menu2.png" />
+        <p>图片分享</p>
+      </van-grid-item>
+      <van-grid-item to="/goods/list">
+        <img src="../assets/img/menu3.png" />
+        <p>商品购买</p>
+      </van-grid-item>
+      <van-grid-item>
+        <img src="../assets/img/menu4.png" />
+        <p>留言反馈</p>
+      </van-grid-item>
+      <van-grid-item>
+        <img src="../assets/img/menu5.png" />
+        <p>视频专区</p>
+      </van-grid-item>
+      <van-grid-item>
+        <img src="../assets/img/menu6.png" />
+        <p>联系我们</p>
+      </van-grid-item>
+    </van-grid>
   </div>
 </template>
+
 <script>
-import { pictureApi } from '@/api'
+import { getIndexImg_api } from '@/api'
 export default {
-  data(){
+  data() {
     return {
-      //图片地址
-      imageArr:[]
+      images: []
     }
+  },
+  created() {
+    this.lunboList()
   },
   methods: {
-    async getImage(){
-      const { data:res } = await pictureApi()
-      res.message.forEach(item => {
-        this.imageArr.push(item.img)
-      });
+    //获取录播图的地址
+    async lunboList() {
+      const { data: res } = await getIndexImg_api()
+      this.images = res.message
     }
-  },
-  created(){
-    this.getImage()
   }
 }
 </script>
-<style lang="less">
-  .lunboImage {
-    height: 200px;
+<style lang='less' scoped>
+img {
+  width: 100%;
+  height: 100%;
+}
+.van-grid {
+  img {
+    width: 60px;
+    height: 60px;
   }
+  p {
+    font-size: 14px;
+  }
+}
 </style>
